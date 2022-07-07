@@ -9,8 +9,8 @@ killall -9 ksuperkey dunst xfce4-power-manager
 xsetroot -cursor_name left_ptr &
 
 # Launch policy kit agent
-if [[ `pidof xfce-polkit` ]]; then
-    /usr/lib/xfce-polkit/xfce-polkit &
+if [[ ! `pidof xfce-polkit` ]]; then
+        /usr/lib/xfce-polkit/xfce-polkit &
 fi
 
 # Super key for Rofi
@@ -22,6 +22,9 @@ xfce4-power-manager &
 
 # Launch compositor
 picom --experimental-backends --config ~/.config/hypr/picom.conf &
+
+# Launch polybar
+sh ~/.config/hypr/polybar/launch.sh &
 
 # Start notification daemon
 dunst -conf ~/.config/hypr/dunstrc &
